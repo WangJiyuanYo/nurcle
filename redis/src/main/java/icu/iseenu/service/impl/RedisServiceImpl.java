@@ -2,6 +2,7 @@ package icu.iseenu.service.impl;
 
 import icu.iseenu.service.RedisService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
@@ -21,6 +22,12 @@ public class RedisServiceImpl implements RedisService {
 
     @Autowired
     private SliderWindowLimit windowLimit;
+
+    private final ChatClient client;
+
+    public RedisServiceImpl(ChatClient.Builder chatClientBuilder) {
+        this.client = chatClientBuilder.build();
+    }
 
     @Override
     public void testLua(String key, String value) {
@@ -44,4 +51,6 @@ public class RedisServiceImpl implements RedisService {
         boolean request = windowLimit.limit(UUID.randomUUID().toString());
         return request ? "请求成功" : "请求失败";
     }
+
+
 }

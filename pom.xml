@@ -12,6 +12,8 @@
         <module>leetcode</module>
         <module>redis</module>
         <module>common</module>
+        <module>design-mode</module>
+        <module>java8</module>
     </modules>
     <properties>
         <java.version>17</java.version>
